@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace AT.Membership.Database.Entities;
+﻿namespace AT.Membership.Database.Entities;
 
 public class SimilarFilms
 {

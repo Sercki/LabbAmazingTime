@@ -7,5 +7,5 @@ public class Director : IEntity
     [Required, MaxLength(50)]
     public string? Name { get; set; }
 
-    public virtual ICollection<Director>? Directors { get;set; }
+    public virtual ICollection<Film>? Films { get;set; }
 }
