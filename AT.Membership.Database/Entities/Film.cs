@@ -2,12 +2,19 @@
 
 public class Film : IEntity
 {
+
+    public Film()
+    {
+        SimilarFilms = new HashSet<SimilarFilms>();
+        Genres = new HashSet<Genre>();
+    }
     public int Id { get; set; }
 
     [Required, MaxLength(50)]
     public string? Title { get; set; }
 
-    public DateOnly? Released { get; set; }
+    [MaxLength(10)]
+    public string? Released { get; set; }
 
     public bool? Free { get; set; }
 

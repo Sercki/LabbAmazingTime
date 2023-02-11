@@ -16,6 +16,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<ATContext>(options => options.UseSqlServer(
+    builder.Configuration.GetConnectionString("ATConnection")));
+
+//builder.Services.AddScoped<IDbService, DbService>();  ODBLOKOWAC POZNIEJ???????????????????????????????????????????
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
