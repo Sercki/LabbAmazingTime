@@ -2,7 +2,6 @@
 
 public class Film : IEntity
 {
-
     public Film()
     {
         SimilarFilms = new HashSet<SimilarFilms>();

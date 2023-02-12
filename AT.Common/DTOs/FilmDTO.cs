@@ -10,11 +10,22 @@ public class FilmDTO
     public string? Thumbnail { get; set; }
     public string? FilmUrl { get; set; }
 
+    // istället för public virtual DirectorDTO? Director { get; set;}
+    //public List<SimilarFilmsDTO>? SimilarFilms { get; set; }
+    //public List<GenreDTO>? Genres { get; set; }
+
+
+    //public int DirectorId { get; set; }
+    //public string? DirectorName { get; set; }
+    //public int MainFilmIdinSimilar { get; set; }
+    //public string? SimilarFilmTitles { get; set; }
+    //public int GenreId { get; set; }
+    //public string? GenreTitles { get; set; }
 
     public int DirectorId { get; set; }    
     //test DirectorName
     public string? DirectorName { get; set; }
-    // zamiast public virtual DirectorDTO? Director { get; set;}
+    // istället för public virtual DirectorDTO? Director { get; set;}
     public int MainFilmIdinSimilar { get; set; }
     public string? SimilarFilmTitles { get; set; }
     //public List<SimilarFilmsDTO>? SimilarFilms { get; set; }
