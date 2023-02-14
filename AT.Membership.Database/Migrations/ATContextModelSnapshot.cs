@@ -69,9 +69,8 @@ namespace AT.Membership.Database.Migrations
                     b.Property<bool?>("Free")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Released")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<DateTime?>("Released")
+                        .HasColumnType("Date");
 
                     b.Property<string>("Thumbnail")
                         .HasMaxLength(1024)
@@ -96,7 +95,7 @@ namespace AT.Membership.Database.Migrations
                             DirectorId = 1,
                             FilmUrl = "https://www.youtube.com/watch?v=KPLWWIOCOOQ",
                             Free = true,
-                            Released = "17.04.2011",
+                            Released = new DateTime(2011, 4, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Thumbnail = "/images/GoT.jpg",
                             Title = "Game of Thrones"
                         });
