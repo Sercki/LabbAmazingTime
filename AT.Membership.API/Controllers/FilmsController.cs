@@ -17,6 +17,7 @@ public class FilmsController : ControllerBase
         try
         {
             _db.Include<Film>();
+            //_db.test();
             //_db.IncludeReference<FilmGenre>();  //FUNGERAR INTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             List<FilmDTO>? films = await _db.GetAsync<Film, FilmDTO>();           
 

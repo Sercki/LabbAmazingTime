@@ -116,9 +116,9 @@ public class DbService : IDbService
         return true;
     }
 
-   public async Task<List<TDto>> GetReferenceAsync<TReferenceEntity, TDto>()
-   where TReferenceEntity : class, IReferenceEntity
-   where TDto : class
+    public async Task<List<TDto>> GetReferenceAsync<TReferenceEntity, TDto>()
+    where TReferenceEntity : class, IReferenceEntity
+    where TDto : class
     {
         var entities = await _db.Set<TReferenceEntity>().ToListAsync();
         return _mapper.Map<List<TDto>>(entities);
@@ -142,4 +142,22 @@ public class DbService : IDbService
         foreach (var name in propertyNames)
             _db.Set<TReferenceEntity>().Include(name).Load();
     }
+
+    //public void IncludeReference<TReferenceEntity>() where TReferenceEntity : class, IReferenceEntity
+    //{
+    //    var propertyNames = _db.Model.FindEntityType(typeof(TReferenceEntity))?.GetNavigations().Select(e => e.Name);
+
+    //    if (propertyNames is null) return;
+
+    //    var endresult = propertyNames.Distinct();
+
+    //    foreach (var name in endresult)
+    //        _db.Set<TReferenceEntity>().Include(name).Load();
+
+    ////}
+    //implement till IDbservice
+    //public void test()
+    //{
+    //    var data = _db.Films.Include(a=> a.Genres).ToList().Select(a=>a.Genres.Count()).ToList();
+    //}
 }

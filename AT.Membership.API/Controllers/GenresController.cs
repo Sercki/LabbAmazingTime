@@ -16,10 +16,11 @@ public class GenresController : ControllerBase
     {
         try
         {
-            _db.Include<Film>();
+            
+            _db.Include<Genre>();
             //_db.IncludeReference<FilmGenre>();  //FUNGERAR INTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             List<GenreDTO>? genres = await _db.GetAsync<Genre, GenreDTO>();
-
+        
             return Results.Ok(genres);
         }
         catch
@@ -34,7 +35,7 @@ public class GenresController : ControllerBase
     {
         try
         {
-            _db.Include<Film>();
+            _db.Include<Genre>();
             var genres = await _db.SingleAsync<Genre, GenreDTO>(c => c.Id.Equals(id));
 
             return Results.Ok(genres);
