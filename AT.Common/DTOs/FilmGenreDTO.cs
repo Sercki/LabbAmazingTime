@@ -9,9 +9,9 @@ public class FilmGenreDTO
     public string? FilmTitle { get; set; }
 
 
-    public FilmGenreDTO(int genreId, int filmId)
-    {
-        GenreId = genreId;
-        FilmId = filmId;
-    }
+    //public FilmGenreDTO(int genreId, int filmId)
+    //{
+    //    GenreId = genreId;
+    //    FilmId = filmId;
+    //}
 }
