@@ -1,6 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
+
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
 namespace AT.Membership.Database.Migrations
 {
@@ -43,7 +46,7 @@ namespace AT.Membership.Database.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Released = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Released = table.Column<DateTime>(type: "Date", nullable: true),
                     Free = table.Column<bool>(type: "bit", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     Thumbnail = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
@@ -107,6 +110,36 @@ namespace AT.Membership.Database.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Directors",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "David Benioff" });
+
+            migrationBuilder.InsertData(
+                table: "Genres",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Action" },
+                    { 2, "Sci-Fi" },
+                    { 3, "Fantasy" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Films",
+                columns: new[] { "Id", "Description", "DirectorId", "FilmUrl", "Free", "Released", "Thumbnail", "Title" },
+                values: new object[] { 1, "It is an American fantasy drama television series created for HBO", 1, "https://www.youtube.com/watch?v=KPLWWIOCOOQ", true, new DateTime(2011, 4, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/GoT.jpg", "Game of Thrones" });
+
+            migrationBuilder.InsertData(
+                table: "FilmGenres",
+                columns: new[] { "FilmId", "GenreId" },
+                values: new object[] { 1, 3 });
+
+            migrationBuilder.InsertData(
+                table: "FilmsSimilar",
+                columns: new[] { "ParentFilmId", "SimilarFilmId" },
+                values: new object[] { 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_FilmGenres_GenreId",

@@ -12,8 +12,8 @@ public class Film : IEntity
     [Required, MaxLength(50)]
     public string? Title { get; set; }
 
-    [MaxLength(10)]
-    public string? Released { get; set; }
+    [Column(TypeName = "Date")]
+    public DateTime? Released { get; set; }
 
     public bool? Free { get; set; }
 

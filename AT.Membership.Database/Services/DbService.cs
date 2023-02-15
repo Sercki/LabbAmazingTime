@@ -1,4 +1,7 @@
-﻿namespace AT.Membership.Database.Services;
+﻿using AT.Membership.Database.Entities;
+using AT.Membership.Database.Entities.Interfaces;
+
+namespace AT.Membership.Database.Services;
 
 public class DbService : IDbService
 {
@@ -87,6 +90,17 @@ public class DbService : IDbService
 
         return true;
     }
+
+    public void Include<TEntity>() where TEntity : class, IEntity
+    {
+        var propertyNames = _db.Model.FindEntityType(typeof(TEntity))?.GetNavigations().Select(e => e.Name);
+
+        if (propertyNames is null) return;
+
+        foreach (var name in propertyNames)
+            _db.Set<TEntity>().Include(name).Load();
+    }
+
     public bool Delete<TReferenceEntity, TDto>(TDto dto) where TReferenceEntity : class where TDto : class
     {
         try
@@ -102,13 +116,48 @@ public class DbService : IDbService
         return true;
     }
 
-    public void Include<TEntity>() where TEntity : class, IEntity
+    public async Task<List<TDto>> GetReferenceAsync<TReferenceEntity, TDto>()
+    where TReferenceEntity : class, IReferenceEntity
+    where TDto : class
     {
-        var propertyNames = _db.Model.FindEntityType(typeof(TEntity))?.GetNavigations().Select(e => e.Name);
+        var entities = await _db.Set<TReferenceEntity>().ToListAsync();
+        return _mapper.Map<List<TDto>>(entities);
+    }
+
+    public async Task<TReferenceEntity> AddReferenceAsync<TReferenceEntity, TDto>(TDto dto)
+   where TReferenceEntity : class, IReferenceEntity
+   where TDto : class
+    {
+        var entity = _mapper.Map<TReferenceEntity>(dto);
+        await _db.Set<TReferenceEntity>().AddAsync(entity);
+        return entity;
+    }
+
+    public void IncludeReference<TReferenceEntity>() where TReferenceEntity : class, IReferenceEntity
+    {
+        var propertyNames = _db.Model.FindEntityType(typeof(TReferenceEntity))?.GetNavigations().Select(e => e.Name);
 
         if (propertyNames is null) return;
 
         foreach (var name in propertyNames)
-            _db.Set<TEntity>().Include(name).Load();
+            _db.Set<TReferenceEntity>().Include(name).Load();
     }
+
+    //public void IncludeReference<TReferenceEntity>() where TReferenceEntity : class, IReferenceEntity
+    //{
+    //    var propertyNames = _db.Model.FindEntityType(typeof(TReferenceEntity))?.GetNavigations().Select(e => e.Name);
+
+    //    if (propertyNames is null) return;
+
+    //    var endresult = propertyNames.Distinct();
+
+    //    foreach (var name in endresult)
+    //        _db.Set<TReferenceEntity>().Include(name).Load();
+
+    ////}
+    //implement till IDbservice
+    //public void test()
+    //{
+    //    var data = _db.Films.Include(a=> a.Genres).ToList().Select(a=>a.Genres.Count()).ToList();
+    //}
 }

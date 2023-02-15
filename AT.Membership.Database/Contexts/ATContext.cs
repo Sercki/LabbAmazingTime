@@ -44,7 +44,7 @@ public class ATContext : DbContext
             new { Id = 1, Name = "David Benioff" });
 
             modelBuilder.Entity<Film>().HasData(
-                new { Id = 1, Title = "Game of Thrones", Released = "17.04.2011", Free = true,
+                new { Id = 1, Title = "Game of Thrones", Released = new DateTime(2011,04,17) , Free = true,
                     Description = "It is an American fantasy drama television series created for HBO",
                     Thumbnail = "/images/GoT.jpg", FilmUrl = "https://www.youtube.com/watch?v=KPLWWIOCOOQ",
                     DirectorId = 1 });

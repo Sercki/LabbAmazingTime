@@ -20,4 +20,8 @@
     <ProjectReference Include="..\AT.Common\AT.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 </Project>
