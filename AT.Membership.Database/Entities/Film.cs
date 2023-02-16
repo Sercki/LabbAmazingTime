@@ -2,11 +2,11 @@
 
 public class Film : IEntity
 {
-    public Film()
-    {
-        SimilarFilms = new HashSet<SimilarFilms>();
-        Genres = new HashSet<Genre>();
-    }
+    //public Film()
+    //{
+    //    SimilarFilms = new HashSet<SimilarFilms>();
+    //    Genres = new HashSet<Genre>();
+    //}
     public int Id { get; set; }
 
     [Required, MaxLength(50)]
@@ -29,6 +29,6 @@ public class Film : IEntity
     public int DirectorId { get; set; }
     public virtual Director? Director { get; set; }
 
-    public virtual ICollection<SimilarFilms>? SimilarFilms { get; set; }
-    public virtual ICollection<Genre>? Genres { get; set; }
+    public virtual ICollection<SimilarFilms>? SimilarFilms { get; set; } = new HashSet<SimilarFilms>();
+    public virtual ICollection<Genre>? Genres { get; set; } =  new HashSet<Genre>();
 }

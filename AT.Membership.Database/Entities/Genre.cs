@@ -7,5 +7,5 @@ public class Genre : IEntity
     [Required, MaxLength(50)]
     public string? Name { get; set; }
 
-    public virtual ICollection<Film>? Films { get; set; }
+    public virtual ICollection<Film>? Films { get; set; } = new HashSet<Film>();
 }

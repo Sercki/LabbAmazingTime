@@ -11,6 +11,8 @@ builder.Services.AddCors(policy =>
 });
 
 // Add services to the container.
+//manage nugget packages => add =>Microsoft.AspNetCore.Mvc.NewtonsoftJson   than change add controllers to:
+//builder.Services.AddControllers().AddNewtonsoftJson(options =>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

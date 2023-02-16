@@ -16,7 +16,7 @@ public class SimilarFilmsController : ControllerBase
     {
         try
         {
-            _db.IncludeReference<SimilarFilms>();
+            _db.Include<SimilarFilms>();            
 
             List<SimilarFilmsDTO>? similarFilms = await _db.GetReferenceAsync<SimilarFilms, SimilarFilmsDTO>();
 
@@ -50,8 +50,8 @@ public class SimilarFilmsController : ControllerBase
 
         return Results.BadRequest();
     }
-    // DELETE api/<SimilarFilmsController>/5
-    [HttpDelete("{id}")]
+    // DELETE api/<SimilarFilmsController>
+    [HttpDelete]
     public async Task<IResult> Delete(SimilarFilmsDTO dto)
     {
         try

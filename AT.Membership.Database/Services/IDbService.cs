@@ -23,8 +23,7 @@ public interface IDbService
         where TReferenceEntity : class, IReferenceEntity
         where TDto : class;
     string GetURI<TEntity>(TEntity entity) where TEntity : class, IEntity;
-    void Include<TEntity>() where TEntity : class, IEntity;
-    void IncludeReference<TReferenceEntity>() where TReferenceEntity : class, IReferenceEntity;
+    void Include<TEntity>() where TEntity : class;          //, IEntity;    
     Task<bool> SaveChangesAsync();
     Task<TDto> SingleAsync<TEntity, TDto>(Expression<Func<TEntity, bool>> expression)
         where TEntity : class, IEntity

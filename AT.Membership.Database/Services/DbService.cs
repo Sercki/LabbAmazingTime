@@ -91,7 +91,7 @@ public class DbService : IDbService
         return true;
     }
 
-    public void Include<TEntity>() where TEntity : class, IEntity
+    public void Include<TEntity>() where TEntity : class            //, IEntity
     {
         var propertyNames = _db.Model.FindEntityType(typeof(TEntity))?.GetNavigations().Select(e => e.Name);
 
@@ -132,17 +132,6 @@ public class DbService : IDbService
         await _db.Set<TReferenceEntity>().AddAsync(entity);
         return entity;
     }
-
-    public void IncludeReference<TReferenceEntity>() where TReferenceEntity : class, IReferenceEntity
-    {
-        var propertyNames = _db.Model.FindEntityType(typeof(TReferenceEntity))?.GetNavigations().Select(e => e.Name);
-
-        if (propertyNames is null) return;
-
-        foreach (var name in propertyNames)
-            _db.Set<TReferenceEntity>().Include(name).Load();
-    }
-
     //public void IncludeReference<TReferenceEntity>() where TReferenceEntity : class, IReferenceEntity
     //{
     //    var propertyNames = _db.Model.FindEntityType(typeof(TReferenceEntity))?.GetNavigations().Select(e => e.Name);

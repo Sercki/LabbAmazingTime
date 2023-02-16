@@ -20,8 +20,9 @@ public class DirectorsController : ControllerBase
     {
         try
         {
-            _db.Include<Film>();
-            //_db.IncludeReference<FilmGenre>();  //FUNGERAR INTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //_db.Include<Film>();
+            //_db.Include<Genre>();
+            _db.Include<FilmGenre>();  //FUNGERAR INTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             List<DirectorDTO>? directors = await _db.GetAsync<Director, DirectorDTO>();
                         
             return Results.Ok(directors);

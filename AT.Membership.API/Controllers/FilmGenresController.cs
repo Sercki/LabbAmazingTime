@@ -17,7 +17,7 @@ public class FilmGenresController : ControllerBase
     {
         try
         {
-            _db.IncludeReference<FilmGenre>();
+            _db.Include<FilmGenre>();
             List<FilmGenreDTO>? filmgenre = await _db.GetReferenceAsync<FilmGenre, FilmGenreDTO>();
 
             return Results.Ok(filmgenre);
@@ -52,8 +52,8 @@ public class FilmGenresController : ControllerBase
         return Results.BadRequest();
     }
 
-    // DELETE api/<FilmGenresController>/5
-    [HttpDelete("{id}")]
+    // DELETE api/<FilmGenresController>
+    [HttpDelete]
     public async Task<IResult> Delete(FilmGenreDTO dto)
     {
         try
