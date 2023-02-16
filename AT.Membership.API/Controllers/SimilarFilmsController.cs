@@ -30,13 +30,13 @@ public class SimilarFilmsController : ControllerBase
 
     // POST api/<SimilarFilmsController>
     [HttpPost]
-    public async Task<IResult> Post([FromBody] SimilarFilmsDTO dto)
+    public async Task<IResult> Post([FromBody] SimilarFilmsPutDeleteDTO dto)
     {
         try
         {
             if (dto == null) return Results.BadRequest();
 
-            var similarFilms = await _db.AddReferenceAsync<SimilarFilms, SimilarFilmsDTO>(dto);
+            var similarFilms = await _db.AddReferenceAsync<SimilarFilms, SimilarFilmsPutDeleteDTO>(dto);
 
             var success = await _db.SaveChangesAsync();
 
@@ -52,11 +52,11 @@ public class SimilarFilmsController : ControllerBase
     }
     // DELETE api/<SimilarFilmsController>
     [HttpDelete]
-    public async Task<IResult> Delete(SimilarFilmsDTO dto)
+    public async Task<IResult> Delete(SimilarFilmsPutDeleteDTO dto)
     {
         try
         {
-            var success = _db.Delete<SimilarFilms, SimilarFilmsDTO>(dto);
+            var success = _db.Delete<SimilarFilms, SimilarFilmsPutDeleteDTO>(dto);
 
             if (!success) return Results.NotFound();
 

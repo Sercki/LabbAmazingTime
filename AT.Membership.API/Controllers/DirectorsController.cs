@@ -20,9 +20,7 @@ public class DirectorsController : ControllerBase
     {
         try
         {
-            //_db.Include<Film>();
-            //_db.Include<Genre>();
-            _db.Include<FilmGenre>();  //FUNGERAR INTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            _db.Include<Director>();  
             List<DirectorDTO>? directors = await _db.GetAsync<Director, DirectorDTO>();
                         
             return Results.Ok(directors);
@@ -39,8 +37,8 @@ public class DirectorsController : ControllerBase
     {
         try
         {
-            _db.Include<Film>();
-            var director = await _db.SingleAsync<Director, DirectorDTO>(c => c.Id.Equals(id));
+			_db.Include<Director>();
+			var director = await _db.SingleAsync<Director, DirectorDTO>(c => c.Id.Equals(id));
 
             return Results.Ok(director);
         }
