@@ -1,17 +1,17 @@
 ﻿namespace AT.Common.DTOs;
 
-public class FilmGenreDTO
+public class FilmGenreDTO: FilmGenrePutDeleteDTO
 {
-    public int GenreId { get; set; }
-    public int FilmId { get; set; }
+    //public int GenreId { get; set; }
+   //public int FilmId { get; set; }
 
     public string? GenreTitle { get; set; }
-    public string? FilmTitle { get; set; }
+    public string? FilmTitle { get; set; }   
+}
 
 
-    //public FilmGenreDTO(int genreId, int filmId)
-    //{
-    //    GenreId = genreId;
-    //    FilmId = filmId;
-    //}
+public class FilmGenrePutDeleteDTO
+{
+	public int GenreId { get; set; }
+	public int FilmId { get; set; }
 }

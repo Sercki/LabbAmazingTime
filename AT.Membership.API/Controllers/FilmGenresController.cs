@@ -6,71 +6,70 @@ namespace AT.Membership.API.Controllers;
 public class FilmGenresController : ControllerBase
 {
 
-    private readonly IDbService _db;
+	private readonly IDbService _db;
 
-    public FilmGenresController(IDbService db) => _db = db;
+	public FilmGenresController(IDbService db) => _db = db;
 
-    // GET: api/<FilmGenresController>
+	// GET: api/<FilmGenresController>
+	[HttpGet]
+	public async Task<IResult> Get()
+	{
+		try
+		{
+			_db.Include<FilmGenre>();
+			List<FilmGenreDTO>? filmgenre = await _db.GetReferenceAsync<FilmGenre, FilmGenreDTO>();
 
-    [HttpGet]
-    public async Task<IResult> Get()
-    {
-        try
-        {
-            _db.Include<FilmGenre>();
-            List<FilmGenreDTO>? filmgenre = await _db.GetReferenceAsync<FilmGenre, FilmGenreDTO>();
-
-            return Results.Ok(filmgenre);
-        }
-        catch
-        {
-        }
-        return Results.NotFound();
-    }
+			return Results.Ok(filmgenre);
+		}
+		catch
+		{
+		}
+		return Results.NotFound();
+	}
 
 
-    // POST api/<FilmGenresController>    
-    [HttpPost]
-    public async Task<IResult> Post([FromBody] FilmGenreDTO dto)
-    {
-        try
-        {
-            if (dto == null) return Results.BadRequest();
+	// POST api/<FilmGenresController>    
+	[HttpPost]
+	public async Task<IResult> Post([FromBody] FilmGenrePutDeleteDTO dto)
+	{
+		try
+		{
+			if (dto == null) return Results.BadRequest();
 
-            var filmgenre = await _db.AddReferenceAsync<FilmGenre, FilmGenreDTO>(dto);
+			var filmgenre = await _db.AddReferenceAsync<FilmGenre, FilmGenrePutDeleteDTO>(dto);
 
-            var success = await _db.SaveChangesAsync();
+			var success = await _db.SaveChangesAsync();
 
-            if (!success) return Results.BadRequest();
-            
-            return Results.Ok(filmgenre);
-        }
-        catch
-        {
-        }
+			if (!success) return Results.BadRequest();
 
-        return Results.BadRequest();
-    }
+			return Results.Ok(filmgenre);
+		}
+		catch
+		{
+		}
 
-    // DELETE api/<FilmGenresController>
-    [HttpDelete]
-    public async Task<IResult> Delete(FilmGenreDTO dto)
-    {
-        try
-        {
-            var success = _db.Delete<FilmGenre,FilmGenreDTO>(dto); 
+		return Results.BadRequest();
+	}
 
-            if (!success) return Results.NotFound();
+	// DELETE api/<FilmGenresController>
+	[HttpDelete]
+	public async Task<IResult> Delete(FilmGenrePutDeleteDTO dto)
+	{
+		try
+		{
+			var success = _db.Delete<FilmGenre, FilmGenrePutDeleteDTO>(dto);
 
-            success = await _db.SaveChangesAsync();
+			if (!success) return Results.NotFound();
 
-            if (!success) return Results.BadRequest();
+			success = await _db.SaveChangesAsync();
 
-            return Results.NoContent();        
-        }
-        catch
-        {
-        }
-        return Results.BadRequest();
-    }
+			if (!success) return Results.BadRequest();
+
+			return Results.NoContent();
+		}
+		catch
+		{
+		}
+		return Results.BadRequest();
+	}
 }

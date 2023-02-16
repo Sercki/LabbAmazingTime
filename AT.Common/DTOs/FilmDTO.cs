@@ -13,8 +13,8 @@ public class FilmDTO
     public int DirectorId { get; set; }                    
     public string? DirectorName { get; set;}               
     public List<SimilarFilmsDTO>? SimilarFilms { get; set; }
-    public List<GenreDTO>? Genres { get; set; }
-    }
+    public List<GenreBaseDTO>? Genres { get; set; } = new();
+}
 
 public class FilmCreateDTO
 {

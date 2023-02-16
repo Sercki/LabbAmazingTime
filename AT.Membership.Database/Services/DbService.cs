@@ -131,22 +131,5 @@ public class DbService : IDbService
         var entity = _mapper.Map<TReferenceEntity>(dto);
         await _db.Set<TReferenceEntity>().AddAsync(entity);
         return entity;
-    }
-    //public void IncludeReference<TReferenceEntity>() where TReferenceEntity : class, IReferenceEntity
-    //{
-    //    var propertyNames = _db.Model.FindEntityType(typeof(TReferenceEntity))?.GetNavigations().Select(e => e.Name);
-
-    //    if (propertyNames is null) return;
-
-    //    var endresult = propertyNames.Distinct();
-
-    //    foreach (var name in endresult)
-    //        _db.Set<TReferenceEntity>().Include(name).Load();
-
-    ////}
-    //implement till IDbservice
-    //public void test()
-    //{
-    //    var data = _db.Films.Include(a=> a.Genres).ToList().Select(a=>a.Genres.Count()).ToList();
-    //}
+    }   
 }

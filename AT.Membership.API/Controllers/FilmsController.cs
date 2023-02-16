@@ -17,10 +17,8 @@ public class FilmsController : ControllerBase
         try
         {
             _db.Include<Film>();
-           
-            //_db.test();
-            //_db.Include<FilmGenre>();  //FUNGERAR INTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            List<FilmDTO>? films = await _db.GetAsync<Film, FilmDTO>();           
+			_db.Include<FilmGenre>();
+			List<FilmDTO>? films = await _db.GetAsync<Film, FilmDTO>();           
 
             return Results.Ok(films);
         }
@@ -37,7 +35,8 @@ public class FilmsController : ControllerBase
         try
         {
             _db.Include<Film>();
-            var film = await _db.SingleAsync<Film, FilmDTO>(c => c.Id.Equals(id));           
+			_db.Include<FilmGenre>();
+			var film = await _db.SingleAsync<Film, FilmDTO>(c => c.Id.Equals(id));           
 
             return Results.Ok(film);
         }
