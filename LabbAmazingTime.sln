@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AT.Admin.UI", "AT.Admin.UI\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AT.Common", "AT.Common\AT.Common.csproj", "{63FED25E-774E-4B25-ACCD-A170835742FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AT.Membership.Database", "AT.Membership.Database\AT.Membership.Database.csproj", "{6A1C7687-D60E-4F6D-823D-CDE347113B68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AT.Membership.Database", "AT.Membership.Database\AT.Membership.Database.csproj", "{6A1C7687-D60E-4F6D-823D-CDE347113B68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AT.Membership.API", "AT.Membership.API\AT.Membership.API.csproj", "{0FC7010F-944C-4C87-98EA-433E22D36F20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AT.Membership.API", "AT.Membership.API\AT.Membership.API.csproj", "{0FC7010F-944C-4C87-98EA-433E22D36F20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
