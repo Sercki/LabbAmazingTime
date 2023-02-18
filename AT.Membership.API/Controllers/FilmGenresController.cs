@@ -36,7 +36,7 @@ public class FilmGenresController : ControllerBase
 		{
 			if (dto == null) return Results.BadRequest();
 
-			var filmgenre = await _db.AddReferenceAsync<FilmGenre, FilmGenrePutDeleteDTO>(dto);
+			var filmgenre = await _db.AddAsync<FilmGenre, FilmGenrePutDeleteDTO>(dto);
 
 			var success = await _db.SaveChangesAsync();
 

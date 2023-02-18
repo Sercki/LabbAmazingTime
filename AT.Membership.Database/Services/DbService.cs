@@ -47,8 +47,8 @@ public class DbService : IDbService
     }
 
     public async Task<TEntity> AddAsync<TEntity, TDto>(TDto dto)
-    where TEntity : class, IEntity
-    where TDto : class
+    where TEntity : class                                               //, IEntity         DELETE SEN!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	where TDto : class
     {
         var entity = _mapper.Map<TEntity>(dto);
         await _db.Set<TEntity>().AddAsync(entity);
@@ -57,6 +57,7 @@ public class DbService : IDbService
 
     public async Task<bool> SaveChangesAsync() =>
         await _db.SaveChangesAsync() >= 0;
+
     public string GetURI<TEntity>(TEntity entity) where TEntity : class, IEntity
         => $"/{typeof(TEntity).Name.ToLower()}s/{entity.Id}";
 
@@ -124,12 +125,12 @@ public class DbService : IDbService
     //    return _mapper.Map<List<TDto>>(entities);
     //}
 
-    public async Task<TReferenceEntity> AddReferenceAsync<TReferenceEntity, TDto>(TDto dto)
-   where TReferenceEntity : class, IReferenceEntity
-   where TDto : class
-    {
-        var entity = _mapper.Map<TReferenceEntity>(dto);
-        await _db.Set<TReferenceEntity>().AddAsync(entity);
-        return entity;
-    }   
+   // public async Task<TReferenceEntity> AddReferenceAsync<TReferenceEntity, TDto>(TDto dto)
+   //where TReferenceEntity : class, IReferenceEntity
+   //where TDto : class
+   // {
+   //     var entity = _mapper.Map<TReferenceEntity>(dto);
+   //     await _db.Set<TReferenceEntity>().AddAsync(entity);
+   //     return entity;
+   // }   
 }

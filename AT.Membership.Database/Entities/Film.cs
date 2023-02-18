@@ -15,7 +15,7 @@ public class Film : IEntity
     [Column(TypeName = "Date")]
     public DateTime? Released { get; set; }
 
-    public bool? Free { get; set; }
+    public bool Free { get; set; }
 
     [MaxLength(200)]
     public string? Description { get; set; }

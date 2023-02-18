@@ -36,7 +36,7 @@ public class SimilarFilmsController : ControllerBase
         {
             if (dto == null) return Results.BadRequest();
 
-            var similarFilms = await _db.AddReferenceAsync<SimilarFilms, SimilarFilmsPutDeleteDTO>(dto);
+            var similarFilms = await _db.AddAsync<SimilarFilms, SimilarFilmsPutDeleteDTO>(dto);
 
             var success = await _db.SaveChangesAsync();
 
