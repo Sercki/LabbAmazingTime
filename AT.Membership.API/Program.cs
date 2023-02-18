@@ -1,3 +1,5 @@
+using AT.Common.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -94,7 +96,6 @@ var mapper = config.CreateMapper();
 builder.Services.AddSingleton(mapper);
 
 builder.Services.AddScoped<IDbService, DbService>();
-
 
 var app = builder.Build();
 

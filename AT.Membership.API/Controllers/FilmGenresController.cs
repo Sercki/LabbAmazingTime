@@ -17,7 +17,7 @@ public class FilmGenresController : ControllerBase
 		try
 		{
 			_db.Include<FilmGenre>();
-			List<FilmGenreDTO>? filmgenre = await _db.GetReferenceAsync<FilmGenre, FilmGenreDTO>();
+			List<FilmGenreDTO>? filmgenre = await _db.GetAsync<FilmGenre, FilmGenreDTO>();
 
 			return Results.Ok(filmgenre);
 		}

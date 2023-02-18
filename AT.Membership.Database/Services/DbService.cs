@@ -15,7 +15,7 @@ public class DbService : IDbService
     }
 
     public async Task<List<TDto>> GetAsync<TEntity, TDto>()
-    where TEntity : class, IEntity
+    where TEntity : class                                               //, IEntity   DELETE SEN!!!!!!!!!!!!!!!!!!!!!!!!!!!
     where TDto : class
     {
         var entities = await _db.Set<TEntity>().ToListAsync();
@@ -116,13 +116,13 @@ public class DbService : IDbService
         return true;
     }
 
-    public async Task<List<TDto>> GetReferenceAsync<TReferenceEntity, TDto>()
-    where TReferenceEntity : class, IReferenceEntity
-    where TDto : class
-    {
-        var entities = await _db.Set<TReferenceEntity>().ToListAsync();
-        return _mapper.Map<List<TDto>>(entities);
-    }
+    //public async Task<List<TDto>> GetReferenceAsync<TReferenceEntity, TDto>()
+    //where TReferenceEntity : class, IReferenceEntity
+    //where TDto : class
+    //{
+    //    var entities = await _db.Set<TReferenceEntity>().ToListAsync();
+    //    return _mapper.Map<List<TDto>>(entities);
+    //}
 
     public async Task<TReferenceEntity> AddReferenceAsync<TReferenceEntity, TDto>(TDto dto)
    where TReferenceEntity : class, IReferenceEntity

@@ -18,7 +18,7 @@ public class SimilarFilmsController : ControllerBase
         {
             _db.Include<SimilarFilms>();            
 
-            List<SimilarFilmsDTO>? similarFilms = await _db.GetReferenceAsync<SimilarFilms, SimilarFilmsDTO>();
+            List<SimilarFilmsDTO>? similarFilms = await _db.GetAsync<SimilarFilms, SimilarFilmsDTO>();
 
             return Results.Ok(similarFilms);
         }

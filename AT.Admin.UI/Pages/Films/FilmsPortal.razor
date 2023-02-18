@@ -1,5 +1,44 @@
-﻿<h3>FilmsPortal</h3>
+﻿@inject IAdminService AdminService
+<h3>FilmsPortal</h3>
 
 @code {
+	List<FilmDTO> Model = new();
 
+	protected override async Task OnInitializedAsync()
+	{
+		//+++++++++++++++++metoder för att testa funktionalitet av AdminService+++++++++++++++++++++++++++++++++
+		//get metod
+		//Model = await AdminService.GetAsync<FilmDTO>("films?freeOnly=false");
+		//single get metod
+		//var test = await AdminService.SingleAsync<FilmDTO>($"films/1");
+		//create metod
+		//await AdminService.CreateAsync<FilmCreateDTO>($"films", new FilmCreateDTO
+		//    {
+		//        Title = "cos",
+		//        Released = new DateTime(2021,11,11),
+		//        Free = false,
+		//        Description = "cos",
+		//        Thumbnail = "cos",
+		//        FilmUrl = "cos",
+		//        DirectorId = 1
+		//    });
+		//Model = await AdminService.GetAsync<FilmDTO>("films?freeOnly=false");
+		//edit metod
+		//await AdminService.EditAsync<FilmEditDTO>($"films/13", new FilmEditDTO
+		//	{
+		//		Id = 13,
+		//		Title = "updated",
+		//		Released = new DateTime(2021, 11, 11),
+		//		Free = false,
+		//		Description = "updated",
+		//		Thumbnail = "updated",
+		//		FilmUrl = "updated",
+		//		DirectorId = 1
+		//	});
+		//Model = await AdminService.GetAsync<FilmDTO>("films?freeOnly=false");
+		//delete metod
+		//await AdminService.DeleteAsync<FilmDTO>($"films/10");
+		//Model = await AdminService.GetAsync<FilmDTO>("films?freeOnly=false");
+		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	}
 }

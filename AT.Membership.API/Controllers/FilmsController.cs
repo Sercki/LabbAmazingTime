@@ -12,13 +12,17 @@ public class FilmsController : ControllerBase
 
     // GET: api/<FilmsController>
     [HttpGet]
-    public async Task<IResult> Get()
+    public async Task<IResult> Get(bool freeOnly)
     {
         try
         {
             _db.Include<Film>();
 			_db.Include<FilmGenre>();
-			List<FilmDTO>? films = await _db.GetAsync<Film, FilmDTO>();           
+			//List<FilmDTO>? films = await _db.GetAsync<Film, FilmDTO>();
+            //under finns metod som implementerar funktion att visa free eller alla filmer
+            List<FilmDTO>? films = freeOnly ?
+                await _db.GetAsync<Film, FilmDTO>(c => c.Free.Equals(freeOnly)) :
+                await _db.GetAsync<Film, FilmDTO>();
 
             return Results.Ok(films);
         }
