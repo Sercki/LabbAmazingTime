@@ -1,0 +1,28 @@
+﻿<table class="table mt-2">
+	<thead>
+		<tr>
+			<th>Film Name </th>
+			<th>Similar Film Name</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.OrderBy(x => x.ParentFilmTitle))
+		{
+			<tr>
+				<td>@item.ParentFilmTitle</td>
+				<td>@item.SimilarFilmTitle</td>
+				<td>
+					<div class="d-flex me-1 justify-content-end">						
+						<button class="btn btn-outline-danger rounded-0" @onclick="@(() => OnClick.InvokeAsync(new ClickReferenceModel(PageType.Delete, item.ParentFilmId, item.SimilarFilmId, item.ParentFilmTitle, item.SimilarFilmTitle)))">Delete</button>
+					</div>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+@code {
+	[Parameter] public List<SimilarFilmsDTO> Model { get; set; } = new();
+	[Parameter] public EventCallback<ClickReferenceModel> OnClick { get; set; }
+}

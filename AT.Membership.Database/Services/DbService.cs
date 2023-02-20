@@ -1,7 +1,4 @@
-﻿using AT.Membership.Database.Entities;
-using AT.Membership.Database.Entities.Interfaces;
-
-namespace AT.Membership.Database.Services;
+﻿namespace AT.Membership.Database.Services;
 
 public class DbService : IDbService
 {
@@ -15,7 +12,7 @@ public class DbService : IDbService
     }
 
     public async Task<List<TDto>> GetAsync<TEntity, TDto>()
-    where TEntity : class                                               //, IEntity   DELETE SEN!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    where TEntity : class                                              
     where TDto : class
     {
         var entities = await _db.Set<TEntity>().ToListAsync();
@@ -47,7 +44,7 @@ public class DbService : IDbService
     }
 
     public async Task<TEntity> AddAsync<TEntity, TDto>(TDto dto)
-    where TEntity : class                                               //, IEntity         DELETE SEN!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    where TEntity : class                                              
 	where TDto : class
     {
         var entity = _mapper.Map<TEntity>(dto);
@@ -116,21 +113,4 @@ public class DbService : IDbService
         }
         return true;
     }
-
-    //public async Task<List<TDto>> GetReferenceAsync<TReferenceEntity, TDto>()
-    //where TReferenceEntity : class, IReferenceEntity
-    //where TDto : class
-    //{
-    //    var entities = await _db.Set<TReferenceEntity>().ToListAsync();
-    //    return _mapper.Map<List<TDto>>(entities);
-    //}
-
-   // public async Task<TReferenceEntity> AddReferenceAsync<TReferenceEntity, TDto>(TDto dto)
-   //where TReferenceEntity : class, IReferenceEntity
-   //where TDto : class
-   // {
-   //     var entity = _mapper.Map<TReferenceEntity>(dto);
-   //     await _db.Set<TReferenceEntity>().AddAsync(entity);
-   //     return entity;
-   // }   
 }

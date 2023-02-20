@@ -10,24 +10,61 @@
 	</div>
 }
 
+@if (Navigation == PageType.Create)
+{
+	<ChangeSimilarFilm Page="@Navigation" OnChange="OnChange"></ChangeSimilarFilm>
+}
+@if (Navigation == PageType.Delete)
+{
+	<ChangeSimilarFilm Page="@Navigation" OnChange="OnChange" Model="SimilarFilm"></ChangeSimilarFilm>
+}
+
 <div class="d-flex me-1">
 	<a href="/" class="btn btn-outline-secondary rounded-0 me-1">Home</a>
 	<button type="button" class="btn btn-outline-primary rounded-0 me-1" @onclick="()=>ChangePageType(PageType.Index)">Index</button>
 	<button type="button" class="btn btn-outline-success rounded-0" @onclick="()=>ChangePageType(PageType.Create)">Create</button>
 </div>
 
+<SimilarFilmsIndex OnClick="OnClick" Model="Model"></SimilarFilmsIndex>
+
 @code {
 	List<SimilarFilmsDTO> Model = new();
 	string Alert { get; set; } = "";
 	string Navigation { get; set; } = PageType.Index;
+	public SimilarFilmsDTO SimilarFilm { get; set; } = new();
 
 	protected override async Task OnInitializedAsync()
 	{
 		Alert = "";
-		//Model = await AdminService.GetAsync<FilmDTO>("films?freeOnly=false");
+		Model = await AdminService.GetAsync<SimilarFilmsDTO>("similarfilms");
 	}
 
 	void ChangePageType(string pageType) => Navigation = pageType;
 
 	void CloseAlert() => Alert = "";
+
+	async Task OnClick(ClickReferenceModel model)
+	{
+		if (model.PageType.Equals(PageType.Delete))
+			SimilarFilm.ParentFilmId = model.firstId;
+		SimilarFilm.SimilarFilmId = model.secondId;
+		SimilarFilm.ParentFilmTitle = model.firstString;
+		SimilarFilm.SimilarFilmTitle = model.secondString;
+
+		ChangePageType(model.PageType);
+	}
+
+	async Task OnChange(string alert)
+	{
+		try
+		{
+			Alert = alert;
+			Model = await AdminService.GetAsync<SimilarFilmsDTO>("similarfilms");
+			ChangePageType(PageType.Index);
+		}
+		catch
+		{
+			Alert = "Couldn't create/edit/delete the similar film.";
+		}
+	}
 }

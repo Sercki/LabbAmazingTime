@@ -10,24 +10,61 @@
 	</div>
 }
 
+@if (Navigation == PageType.Create)
+{
+	<ChangeFilmGenre Page="@Navigation" OnChange="OnChange"></ChangeFilmGenre>
+}
+@if (Navigation == PageType.Delete)
+{
+	<ChangeFilmGenre Page="@Navigation" OnChange="OnChange" Model="FilmGenre"></ChangeFilmGenre>
+}
+
 <div class="d-flex me-1">
 	<a href="/" class="btn btn-outline-secondary rounded-0 me-1">Home</a>
 	<button type="button" class="btn btn-outline-primary rounded-0 me-1" @onclick="()=>ChangePageType(PageType.Index)">Index</button>
 	<button type="button" class="btn btn-outline-success rounded-0" @onclick="()=>ChangePageType(PageType.Create)">Create</button>
 </div>
 
+<FilmGenresIndex OnClick="OnClick" Model="Model"></FilmGenresIndex>
+
 @code {
 	List<FilmGenreDTO> Model = new();
 	string Alert { get; set; } = "";
 	string Navigation { get; set; } = PageType.Index;
+	public FilmGenreDTO FilmGenre { get; set; } = new();
 
 	protected override async Task OnInitializedAsync()
 	{
 		Alert = "";
-		//Model = await AdminService.GetAsync<FilmDTO>("films?freeOnly=false");
+		Model = await AdminService.GetAsync<FilmGenreDTO>("filmgenres");
 	}
 
 	void ChangePageType(string pageType) => Navigation = pageType;
 
 	void CloseAlert() => Alert = "";
+
+	async Task OnClick(ClickReferenceModel model)
+	{
+		if (model.PageType.Equals(PageType.Delete))
+			FilmGenre.FilmId = model.firstId;
+			FilmGenre.GenreId = model.secondId;
+			FilmGenre.FilmTitle = model.firstString;
+			FilmGenre.GenreTitle = model.secondString;
+		
+		ChangePageType(model.PageType);
+	}
+
+	async Task OnChange(string alert)
+	{
+		try
+		{
+			Alert = alert;
+			Model = await AdminService.GetAsync<FilmGenreDTO>("filmgenres");
+			ChangePageType(PageType.Index);
+		}
+		catch
+		{
+			Alert = "Couldn't create/edit/delete the filmgenre.";
+		}
+	}
 }
