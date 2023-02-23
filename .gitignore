@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/AT.Membership.UI/wwwroot/images/LoTR.jpg
+/AT.Membership.UI/wwwroot/images/IronMan.jpg
+/AT.Membership.UI/wwwroot/images/GoT.jpg
