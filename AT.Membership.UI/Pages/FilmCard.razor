@@ -1,0 +1,11 @@
+﻿
+<a href="Film/@Film.Id" class="">
+<div style="max-width:250px;">
+    <div class="card rounded-0 m-2 h-100">
+        <img class="card-img-top rounded-0" src="@Film.Thumbnail" alt="Film Poster">        
+    </div>
+</div>
+</a>
+@code {
+	[Parameter] public FilmDTO Film { get; set; }
+}

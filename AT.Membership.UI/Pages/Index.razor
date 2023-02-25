@@ -4,3 +4,41 @@
 <PageTitle>Index</PageTitle>
 
 <h1 class="text-center">Amazing Time Dashboard</h1>
+
+@foreach (var genre in Genres)
+{
+	<ul class="list-group">
+		<li class="list-group-item border border-0">
+			<h3 class="fw-bold">@genre.Name</h3>
+			<div class="d-flex flex-wrap justify-content-center">
+				@foreach (var filmgenre in FilmGenres)
+				{
+					@if (genre.Id.Equals(filmgenre.GenreId))
+					{
+						@foreach (var film in Films)
+						{
+							@if (film.Id.Equals(filmgenre.FilmId))
+							{
+								<FilmCard Film="film" />
+							}
+						}
+					}
+				}
+			</div>
+		</li>
+	</ul>
+}
+
+
+@code {
+	public List<FilmDTO> Films { get; set; } = new();
+	public List<GenreDTO> Genres { get; set; } = new();
+	public List<FilmGenreDTO> FilmGenres { get; set; } = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		Films = await membershipService.GetFilmsAsync();
+		Genres = await membershipService.GetGenresAsync();
+		FilmGenres = await membershipService.GetFilmGenresAsync();
+	}
+}

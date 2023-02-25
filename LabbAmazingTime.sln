@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AT.Membership.Database", "A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AT.Membership.API", "AT.Membership.API\AT.Membership.API.csproj", "{0FC7010F-944C-4C87-98EA-433E22D36F20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AT.Membership.UI", "AT.Membership.UI\AT.Membership.UI.csproj", "{2C903691-E740-4CEE-92B3-0E91A4DF09A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AT.Membership.UI", "AT.Membership.UI\AT.Membership.UI.csproj", "{2C903691-E740-4CEE-92B3-0E91A4DF09A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
