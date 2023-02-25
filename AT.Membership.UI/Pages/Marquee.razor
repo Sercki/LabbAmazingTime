@@ -42,12 +42,11 @@
 				</p>
 			</div>
 		</div>
-		<div class="card rounded-0 m-2 " style="max-width:350px;">
+		<div class="card rounded-0 m-2 border border-0 " style="max-width:800px;">
 			<div class="card-body">
-				<ul class="list-group">
-					<li class="list-group-item border border-0">
+				<div>
 						<h3 class="fw-bold">Similar Films:</h3>
-						<div class="d-flex flex-wrap justify-content-center">
+					<div class="d-flex flex-wrap justify-content-start row row-cols-3 ">						
 							@foreach (var similarfilm in SimilarFilms)
 							{
 								@if (Film.Id.Equals(similarfilm.ParentFilmId))
@@ -62,8 +61,8 @@
 								}
 							}
 						</div>
-					</li>
-				</ul>
+					
+				</div>
 			</div>
 		</div>
 	</div>
