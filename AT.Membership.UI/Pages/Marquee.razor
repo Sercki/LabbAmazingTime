@@ -4,10 +4,11 @@
 		<div class="card rounded-0 m-2 " style="max-width:350px;">
 			<div class="card-body">
 				<h1 class="card-title">@Film.Title</h1>
-				<p class="card-text">@Film.Description</p>
-				<a href="#" class="btn btn-danger rounded-0 mb-1"
-				<i class="oi oi-media-play"></i><span class="vertical-align">Play Film!</span>
+				<p class="card-text">@Film.Description</p>				
+				<a class="btn btn-danger rounded-0 mb-1" href="VideoPlayer/@Film.Id">
+					<i class="oi oi-media-play"></i><span class="vertical-align">Play Film!</span>
 				</a>
+				
 			</div>
 		</div>
 		<div class="card rounded-0 m-2 " style="max-width:350px;">
@@ -42,7 +43,7 @@
 				</p>
 			</div>
 		</div>
-		<div class="card rounded-0 m-2 border border-0 " style="max-width:800px;">
+	<div class="card rounded-0 m-2 border border-0 " style="max-width:800px;">
 			<div class="card-body">
 				<div>
 						<h3 class="fw-bold">Similar Films:</h3>
