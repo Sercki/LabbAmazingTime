@@ -4,11 +4,11 @@
 		<div class="card rounded-0 m-2 " style="max-width:350px;">
 			<div class="card-body">
 				<h1 class="card-title">@Film.Title</h1>
-				<p class="card-text">@Film.Description</p>				
+				<p class="card-text">@Film.Description</p>
 				<a class="btn btn-danger rounded-0 mb-1" href="VideoPlayer/@Film.Id">
 					<i class="oi oi-media-play"></i><span class="vertical-align">Play Film!</span>
 				</a>
-				
+
 			</div>
 		</div>
 		<div class="card rounded-0 m-2 " style="max-width:350px;">
@@ -43,26 +43,26 @@
 				</p>
 			</div>
 		</div>
-	<div class="card rounded-0 m-2 border border-0 " style="max-width:800px;">
+		<div class="card rounded-0 m-2 border border-0 " style="max-width:800px;">
 			<div class="card-body">
 				<div>
-						<h3 class="fw-bold">Similar Films:</h3>
-					<div class="d-flex flex-wrap justify-content-start row row-cols-3 ">						
-							@foreach (var similarfilm in SimilarFilms)
+					<h3 class="fw-bold">Similar Films:</h3>
+					<div class="d-flex flex-wrap justify-content-start row row-cols-3 ">
+						@foreach (var similarfilm in SimilarFilms)
+						{
+							@if (Film.Id.Equals(similarfilm.ParentFilmId))
 							{
-								@if (Film.Id.Equals(similarfilm.ParentFilmId))
+								@foreach (var video in FilmList)
 								{
-									@foreach (var video in FilmList)
+									@if (similarfilm.SimilarFilmId.Equals(video.Id))
 									{
-										@if (similarfilm.SimilarFilmId.Equals(video.Id))
-										{
-											<FilmCard Film="video" />
-										}
+										<FilmCard Film="video"/>
 									}
 								}
 							}
-						</div>
-					
+						}
+					</div>
+
 				</div>
 			</div>
 		</div>
