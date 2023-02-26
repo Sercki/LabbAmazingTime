@@ -1,0 +1,48 @@
+﻿@inject IMembershipService membershipService
+
+<div class="card rounded-0 m-2 " style="max-width:350px;">
+	<div class="card-body">
+		<p class="card-text">Director: <span class="fw-bold">@Film.DirectorName</span></p>
+		<p class="card-text">
+			Released: <span class="fw-bold">
+				@if (Film.Released != null)
+				{
+					@Film.Released.Value.ToString("d")
+				}
+			</span>
+		</p>
+		<p class="card-text">
+			Genre:
+
+			@foreach (var filmgenre in FilmGenres)
+			{
+				@if (Film.Id.Equals(filmgenre.FilmId))
+				{
+					@foreach (var genre in Genres)
+					{
+						@if (genre.Id.Equals(filmgenre.GenreId))
+						{
+							<span class="fw-bold">@filmgenre.GenreTitle</span>
+							<span> || </span>
+						}
+					}
+				}
+			}
+		</p>
+	</div>
+</div>
+@code {
+	[Parameter] public FilmDTO Film { get; set; }
+	public List<SimilarFilmsDTO> SimilarFilms { get; set; } = new();
+	public List<FilmDTO> FilmList { get; set; } = new();
+	public List<FilmGenreDTO> FilmGenres { get; set; } = new();
+	public List<GenreDTO> Genres { get; set; } = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		SimilarFilms = await membershipService.GetSimilarFilmsAsync();
+		FilmList = await membershipService.GetFilmsAsync();
+		FilmGenres = await membershipService.GetFilmGenresAsync();
+		Genres = await membershipService.GetGenresAsync();
+	}
+}

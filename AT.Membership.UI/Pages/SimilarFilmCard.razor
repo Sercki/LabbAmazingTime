@@ -1,0 +1,40 @@
+﻿@inject IMembershipService membershipService
+
+<div class="card rounded-0 m-2 border border-0 " style="max-width:800px;">
+	<div class="card-body">
+		<div>
+			<h3 class="fw-bold">Similar Films:</h3>
+			<div class="d-flex flex-wrap justify-content-start row row-cols-3 ">
+				@foreach (var similarfilm in SimilarFilms)
+				{
+					@if (Film.Id.Equals(similarfilm.ParentFilmId))
+					{
+						@foreach (var video in FilmList)
+						{
+							@if (similarfilm.SimilarFilmId.Equals(video.Id))
+							{
+								<FilmCard Film="video" />
+							}
+						}
+					}
+				}
+			</div>
+
+		</div>
+	</div>
+</div>
+@code {
+	[Parameter] public FilmDTO Film { get; set; }
+	public List<SimilarFilmsDTO> SimilarFilms { get; set; } = new();
+	public List<FilmDTO> FilmList { get; set; } = new();
+	public List<FilmGenreDTO> FilmGenres { get; set; } = new();
+	public List<GenreDTO> Genres { get; set; } = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		SimilarFilms = await membershipService.GetSimilarFilmsAsync();
+		FilmList = await membershipService.GetFilmsAsync();
+		FilmGenres = await membershipService.GetFilmGenresAsync();
+		Genres = await membershipService.GetGenresAsync();
+	}
+}
